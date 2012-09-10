@@ -6,6 +6,9 @@
 #import "NTLog.h"
 
 
+static NTLogEntryType sLogFlags = NTLogEntryTypeAll;    // default to all debugging on
+
+
 NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType);
 
 
@@ -21,8 +24,17 @@ NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType)
 }
 
 
+void NTLogEnableLogging(NTLogEntryType flags)
+{
+    sLogFlags = flags;
+}
+
+
 void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...)
 {
+    if ( !(sLogFlags & logEntryType) )
+        return ;    // ignore
+    
     const int MAX_LENGTH = 1024 - 3;    // -3 for @"..."
     
 	static CFTimeZoneRef zone = nil;
