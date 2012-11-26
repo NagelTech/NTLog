@@ -7,9 +7,7 @@
 
 
 static NTLogEntryType sLogFlags = NTLogEntryTypeAll;    // default to all debugging on
-
-
-NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType);
+static NSMutableArray *sListeners = nil;
 
 
 NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType)
@@ -27,6 +25,15 @@ NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType)
 void NTLogEnableLogging(NTLogEntryType flags)
 {
     sLogFlags = flags;
+}
+
+
+void NTLog_AddListener(id<NTLogListener> listener)
+{
+    if ( !sListeners )
+        sListeners = [NSMutableArray new];
+    
+    [sListeners addObject:listener];
 }
 
 
@@ -57,9 +64,11 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
     if ( logEntryType != NTLogEntryTypeLog )
         [message appendFormat:@"%@: ", NTLog_GetLogEntryTypeName(logEntryType)];
     
+    NSString *threadName = nil;
+
     if ( ![NSThread isMainThread] )
     {
-        NSString *threadName = [NSThread currentThread].name;
+        threadName = [NSThread currentThread].name;
         
         if ( !threadName || !threadName.length )
             threadName = [NSString stringWithFormat:@"Thread-%p", [NSThread currentThread]];
@@ -67,7 +76,9 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
         [message appendFormat:@"%@@", threadName];
     }
     
-    [message appendFormat:@"[%@:%d] ", [[filename lastPathComponent] stringByDeletingPathExtension], lineNum];
+    NSString *location = [NSString stringWithFormat:@"%@:%d", [[filename lastPathComponent] stringByDeletingPathExtension], lineNum];
+    
+    [message appendFormat:@"[%@] ", location];
     
     NSString *user_message = [[NSString alloc] initWithFormat:format arguments:args];
     
@@ -83,6 +94,19 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
     //    printf("%s\n", [message UTF8String]);    // Might cause problems in IOS 5.1+ ??
     
     NSLog(@"%@", message);      // use formatting in case our formatted string uses any formatting.
+    
+    if ( sListeners )
+    {
+        for(id<NTLogListener> listener in sListeners)
+        {
+            
+            if ( [listener respondsToSelector:@selector(writeType:thread:location:message:)] )
+                [listener writeType:logEntryType thread:threadName location:location message:user_message];
+            
+            if ( [listener respondsToSelector:@selector(writeLine:)] )
+                [listener writeLine:message];
+        }
+    }
     
     message = nil;  // arc will deallocate
 }
