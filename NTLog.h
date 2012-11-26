@@ -19,6 +19,17 @@ typedef enum
 } NTLogEntryType;
 
 
+@protocol NTLogListener <NSObject>
+
+@optional
+
+// one of the following must be implemented...
+
+-(void)writeLine:(NSString *)line;
+-(void)writeType:(NTLogEntryType)type thread:(NSString *)thread location:(NSString *)location message:(NSString *)message;
+
+@end
+
 
 #define NTLogDebug(...)         NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeDebug, __VA_ARGS__)
 #define NTLog(...)              NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeLog, __VA_ARGS__)
@@ -28,6 +39,8 @@ typedef enum
 
 
 void NTLogEnableLogging(NTLogEntryType flags);
+NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType);
+void NTLog_AddListener(id<NTLogListener> listener);
 
 void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...);
 
