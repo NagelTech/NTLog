@@ -8,6 +8,7 @@
 
 typedef enum
 {
+    NTLogEntryTypeNone    = 0,
     NTLogEntryTypeDebug   = 1,
     NTLogEntryTypeLog     = 2,
     NTLogEntryTypeWarn    = 4,
@@ -38,6 +39,7 @@ typedef enum
 #define NTLogFatal(...)         NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeFatal, __VA_ARGS__)
 
 
+void NTLogEnableConsoleLogging(NTLogEntryType flags);
 void NTLogEnableLogging(NTLogEntryType flags);
 NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType);
 void NTLog_AddListener(id<NTLogListener> listener);
