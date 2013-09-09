@@ -7,6 +7,7 @@
 
 
 static NTLogEntryType sLogFlags = NTLogEntryTypeAll;    // default to all debugging on
+static NTLogEntryType sConsoleLogFlags = NTLogEntryTypeAll;    // default to all debugging on
 static NSMutableArray *sListeners = nil;
 
 
@@ -25,6 +26,12 @@ NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType)
 void NTLogEnableLogging(NTLogEntryType flags)
 {
     sLogFlags = flags;
+    sConsoleLogFlags = flags;
+}
+
+void NTLogEnableConsoleLogging(NTLogEntryType flags)
+{
+    sConsoleLogFlags = flags;
 }
 
 
@@ -39,8 +46,8 @@ void NTLog_AddListener(id<NTLogListener> listener)
 
 void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...)
 {
-    if ( !(sLogFlags & logEntryType) )
-        return ;    // ignore
+    if ( !(sLogFlags & logEntryType) && !(sConsoleLogFlags && logEntryType) )
+        return;
     
     const int MAX_LENGTH = 1024 - 3;    // -3 for @"..."
     
@@ -93,9 +100,10 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
     
     //    printf("%s\n", [message UTF8String]);    // Might cause problems in IOS 5.1+ ??
     
-    NSLog(@"%@", message);      // use formatting in case our formatted string uses any formatting.
+    if ( sConsoleLogFlags && logEntryType )
+        NSLog(@"%@", message);      // use formatting in case our formatted string uses any formatting.
     
-    if ( sListeners )
+    if ( sListeners && (sLogFlags && logEntryType) )
     {
         for(id<NTLogListener> listener in sListeners)
         {
