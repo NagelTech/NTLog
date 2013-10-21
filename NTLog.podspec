@@ -8,7 +8,6 @@ Pod::Spec.new do |s|
   s.author       = { "Ethan Nagel" => "eanagel@gmail.com" }
   s.platform     = :ios
   s.source       = { :git => "https://github.com/NagelTech/NTLog.git", :tag => "v0.41" }
-  s.source_files = '*.{h,m}'
 
   s.subspec "Core" do |sp|
     sp.source_files = 'Core'
