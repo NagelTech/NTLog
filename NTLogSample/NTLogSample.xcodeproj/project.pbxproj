@@ -24,6 +24,7 @@
 		F07B3208187A86CA00D6E54B /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07B3205187A86CA00D6E54B /* MainViewController.xib */; };
 		F07B320C187A86FA00D6E54B /* LogEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F07B320B187A86FA00D6E54B /* LogEntryCell.m */; };
 		F07B320E187A871700D6E54B /* LogEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07B320D187A871700D6E54B /* LogEntryCell.xib */; };
+		F092ECF9188A5934005648DE /* NTLog.podspec in Resources */ = {isa = PBXBuildFile; fileRef = F092ECF8188A5934005648DE /* NTLog.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		F07B320A187A86FA00D6E54B /* LogEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntryCell.h; sourceTree = "<group>"; };
 		F07B320B187A86FA00D6E54B /* LogEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntryCell.m; sourceTree = "<group>"; };
 		F07B320D187A871700D6E54B /* LogEntryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogEntryCell.xib; sourceTree = "<group>"; };
+		F092ECF8188A5934005648DE /* NTLog.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NTLog.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		F07B31D2187A689F00D6E54B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F092ECF8188A5934005648DE /* NTLog.podspec */,
 				F07B31D3187A689F00D6E54B /* NTLogSample-Info.plist */,
 				F07B31D4187A689F00D6E54B /* InfoPlist.strings */,
 				F07B31D7187A689F00D6E54B /* main.m */,
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F07B31D6187A689F00D6E54B /* InfoPlist.strings in Resources */,
+				F092ECF9188A5934005648DE /* NTLog.podspec in Resources */,
 				F07B320E187A871700D6E54B /* LogEntryCell.xib in Resources */,
 				F07B3208187A86CA00D6E54B /* MainViewController.xib in Resources */,
 				F07B31DE187A689F00D6E54B /* Images.xcassets in Resources */,
@@ -492,6 +496,7 @@
 				F07B31F6187A689F00D6E54B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F07B31F7187A689F00D6E54B /* Build configuration list for PBXNativeTarget "NTLogSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +505,7 @@
 				F07B31F9187A689F00D6E54B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
