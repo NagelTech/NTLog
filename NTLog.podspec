@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.author       = { "Ethan Nagel" => "eanagel@gmail.com" }
   s.platform     = :ios
   s.source       = { :git => "https://github.com/NagelTech/NTLog.git", :tag => "1.01" }
+  s.requires_arc = true
 
   s.subspec "Core" do |sp|
     sp.source_files = 'Core'
