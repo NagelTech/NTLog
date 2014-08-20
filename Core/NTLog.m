@@ -90,7 +90,6 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
     NSString *user_message = [[NSString alloc] initWithFormat:format arguments:args];
     
     [message appendString:user_message];
-    user_message = nil; // arc
     
     if ( message.length > MAX_LENGTH )
     {
@@ -117,5 +116,6 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
     }
     
     message = nil;  // arc will deallocate
+    user_message = nil;
 }
 
