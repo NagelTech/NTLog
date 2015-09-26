@@ -58,16 +58,13 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
     va_start(args, format);
     
     NSMutableString *message = [NSMutableString new];
-    
-    /* not needed when using NSLog
-     CFGregorianDate date = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), zone);
+
+    CFGregorianDate date = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), zone);
      
-     [message appendFormat:@"%02i/%02i/%02i ", date.year%100, date.month, date.day];
+    [message appendFormat:@"%02i/%02i/%02i ", date.year%100, date.month, date.day];
      
-     [message appendFormat:@"%02i:%02i:%02i ", date.hour, date.minute, (unsigned)date.second];
-     */
-    
-    
+    [message appendFormat:@"%02i:%02i:%02i ", date.hour, date.minute, (unsigned)date.second];
+
     if ( logEntryType != NTLogEntryTypeLog )
         [message appendFormat:@"%@: ", NTLog_GetLogEntryTypeName(logEntryType)];
     
@@ -97,11 +94,10 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
         [message appendString:@"..."];
     }
     
-    //    printf("%s\n", [message UTF8String]);    // Might cause problems in IOS 5.1+ ??
     
     if ( sConsoleLogFlags && logEntryType )
-        NSLog(@"%@", message);      // use formatting in case our formatted string uses any formatting.
-    
+        printf("%s\n", [message UTF8String]);
+
     if ( sListeners && (sLogFlags && logEntryType) )
     {
         for(id<NTLogListener> listener in sListeners)

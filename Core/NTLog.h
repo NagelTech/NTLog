@@ -6,7 +6,7 @@
 #import <Foundation/Foundation.h>
 
 
-typedef enum
+typedef NS_OPTIONS(NSInteger, NTLogEntryType)
 {
     NTLogEntryTypeNone    = 0,
     NTLogEntryTypeDebug   = 1,
@@ -17,7 +17,7 @@ typedef enum
     
     NTLogEntryTypeAll     = NTLogEntryTypeDebug | NTLogEntryTypeLog | NTLogEntryTypeWarn | NTLogEntryTypeError | NTLogEntryTypeFatal,
     
-} NTLogEntryType;
+} ;
 
 
 @protocol NTLogListener <NSObject>
@@ -38,6 +38,9 @@ typedef enum
 #define NTLogError(...)         NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeError, __VA_ARGS__)
 #define NTLogFatal(...)         NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeFatal, __VA_ARGS__)
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void NTLogEnableConsoleLogging(NTLogEntryType flags);
 void NTLogEnableLogging(NTLogEntryType flags);
@@ -46,3 +49,6 @@ void NTLog_AddListener(id<NTLogListener> listener);
 
 void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...) NS_FORMAT_FUNCTION(4,5);
 
+#ifdef __cplusplus
+}
+#endif
