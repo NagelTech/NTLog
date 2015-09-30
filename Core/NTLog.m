@@ -58,9 +58,9 @@ void NTLog_Logv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NS
 
     CFGregorianDate date = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), zone);
      
-    [message appendFormat:@"%02i-%02i-%02i ", (int)date.year%100, (int)date.month, (int)date.day];
+    [message appendFormat:@"%02zd-%02zd-%02zd ", date.year%100, date.month, date.day];
      
-    [message appendFormat:@"%02i:%02i:%02i ", date.hour, date.minute, (unsigned)date.second];
+    [message appendFormat:@"%02zd:%02zd:%02zd ", date.hour, date.minute, (int)date.second];
 
     if ( logEntryType != NTLogEntryTypeLog )
         [message appendFormat:@"%@: ", NTLog_GetLogEntryTypeName(logEntryType)];
