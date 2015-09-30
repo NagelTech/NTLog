@@ -72,9 +72,7 @@ void NTLogOutputv(NSString *filename, int lineNum, NTLogEntryType logEntryType, 
     NSMutableString *message = [NSMutableString new];
 
     CFGregorianDate date = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), zone);
-     
-    [message appendFormat:@"%02zd-%02zd-%02zd ", date.year%100, date.month, date.day];
-     
+
     [message appendFormat:@"%02zd:%02zd:%02zd ", date.hour, date.minute, (int)date.second];
 
     if ( logEntryType != NTLogEntryTypeInfo )
