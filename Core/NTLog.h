@@ -51,6 +51,7 @@ extern "C" {
 void NTLogEnableConsoleLogging(NTLogEntryType flags);
 void NTLogEnableLogging(NTLogEntryType flags);
 NSString *NTLogGetLogEntryTypeName(NTLogEntryType logEntryType);
+void NTLogSetMaxLineLength(SInt32 maxLineLength);
 void NTLogAddListener(id<NTLogListener> listener);
 void NTLogOutputv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, va_list args);
 void NTLogOutput(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...) NS_FORMAT_FUNCTION(4,5);

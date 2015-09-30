@@ -6,12 +6,13 @@
 #import "NTLog.h"
 
 
-static NTLogEntryType sLogFlags = NTLogEntryTypeAll;    // default to all debugging on
-static NTLogEntryType sConsoleLogFlags = NTLogEntryTypeAll;    // default to all debugging on
-static NSMutableArray *sListeners = nil;
+static NTLogEntryType sLogFlags = NTLogEntryTypeAll;            // default to all debugging on
+static NTLogEntryType sConsoleLogFlags = NTLogEntryTypeAll;     // default to all debugging on
+static SInt32 sMaxLineLength = 1024;                            // default
+static NSArray *sListeners = nil;
 
 
-NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType)
+NSString *NTLogGetLogEntryTypeName(NTLogEntryType logEntryType)
 {
     if ( logEntryType & NTLogEntryTypeFatal )         return @"Fatal";
     if ( logEntryType & NTLogEntryTypeError )         return @"Error";
@@ -29,31 +30,45 @@ void NTLogEnableLogging(NTLogEntryType flags)
     sConsoleLogFlags = flags;
 }
 
+
 void NTLogEnableConsoleLogging(NTLogEntryType flags)
 {
     sConsoleLogFlags = flags;
 }
 
 
+void NTLogSetMaxLineLength(int maxLineLength)
+{
+    sMaxLineLength = maxLineLength;
+}
+
+
 void NTLogAddListener(id<NTLogListener> listener)
 {
-    if ( !sListeners )
-        sListeners = [NSMutableArray new];
-    
-    [sListeners addObject:listener];
+    assert([NSThread isMainThread]);
+    sListeners = [sListeners arrayByAddingObject:listener] ?: @[listener];
 }
 
 
 void NTLogOutputv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, va_list args)
 {
-    if ( !(sLogFlags & logEntryType) && !(sConsoleLogFlags & logEntryType) )
-        return;
+    // grab our own copy of these values on the stack, so nothing changes during the call
+
+    NTLogEntryType logFlags = sLogFlags;
+    NTLogEntryType consoleLogFlags = sConsoleLogFlags;
+    SInt32 maxLineLength = sMaxLineLength;
+    NSArray *listeners = sListeners;
+
+    if ( !(logFlags & logEntryType) && !(consoleLogFlags & logEntryType) )
+        return ;
     
-    const int MAX_LENGTH = 1024 - 3;    // -3 for @"..."
-    
-	static CFTimeZoneRef zone = nil;
-	if (!zone) zone = CFTimeZoneCopyDefault();
-    
+	static CFTimeZoneRef zone;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        zone = CFTimeZoneCopyDefault();
+    });
+
     NSMutableString *message = [NSMutableString new];
 
     CFGregorianDate date = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), zone);
@@ -63,7 +78,7 @@ void NTLogOutputv(NSString *filename, int lineNum, NTLogEntryType logEntryType, 
     [message appendFormat:@"%02zd:%02zd:%02zd ", date.hour, date.minute, (int)date.second];
 
     if ( logEntryType != NTLogEntryTypeInfo )
-        [message appendFormat:@"%@: ", NTLog_GetLogEntryTypeName(logEntryType)];
+        [message appendFormat:@"%@: ", NTLogGetLogEntryTypeName(logEntryType)];
     
     NSString *threadName = nil;
 
@@ -82,22 +97,21 @@ void NTLogOutputv(NSString *filename, int lineNum, NTLogEntryType logEntryType, 
     [message appendFormat:@"[%@] ", location];
     
     NSString *user_message = [[NSString alloc] initWithFormat:format arguments:args];
-    
+
     [message appendString:user_message];
     
-    if ( message.length > MAX_LENGTH )
+    if ( maxLineLength > 0 && message.length > maxLineLength )
     {
-        [message deleteCharactersInRange:NSMakeRange(MAX_LENGTH, message.length-MAX_LENGTH)];
+        [message deleteCharactersInRange:NSMakeRange(maxLineLength - 3, message.length - (maxLineLength - 3))];
         [message appendString:@"..."];
     }
-    
-    
+
     if ( sConsoleLogFlags & logEntryType )
         printf("%s\n", [message UTF8String]);
 
-    if ( sListeners && (sLogFlags & logEntryType) )
+    if ( listeners && (logFlags & logEntryType) )
     {
-        for(id<NTLogListener> listener in sListeners)
+        for(id<NTLogListener> listener in listeners)
         {
             
             if ( [listener respondsToSelector:@selector(writeType:thread:location:message:)] )
