@@ -84,16 +84,20 @@ void NTLogOutputv(NSString *filename, int lineNum, NTLogEntryType logEntryType, 
     {
         threadName = [NSThread currentThread].name;
         
-        if ( !threadName || !threadName.length )
+        if ( !threadName.length )
             threadName = [NSString stringWithFormat:@"Thread-%p", [NSThread currentThread]];
-        
-        [message appendFormat:@"%@@", threadName];
     }
+
+    NSString *location = nil;
     
-    NSString *location = [NSString stringWithFormat:@"%@:%d", [[filename lastPathComponent] stringByDeletingPathExtension], lineNum];
-    
-    [message appendFormat:@"[%@] ", location];
-    
+    if ( logEntryType & (NTLogEntryTypeWarn|NTLogEntryTypeError|NTLogEntryTypeFatal))
+        location = [NSString stringWithFormat:@"%@:%d", [[filename lastPathComponent] stringByDeletingPathExtension], lineNum];
+
+    if (threadName && location)
+        [message appendFormat:@"[%@@%@] ", threadName, location];
+    else if (threadName || location)
+        [message appendFormat:@"[%@] ", threadName ?: location];
+
     NSString *user_message = [[NSString alloc] initWithFormat:format arguments:args];
 
     [message appendString:user_message];
