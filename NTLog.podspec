@@ -14,11 +14,10 @@ Pod::Spec.new do |s|
     sp.source_files = 'Core'
  end
 
-  s.subspec "Crashlytics" do |sp|
-    sp.source_files = 'Listeners/Crashlytics'
-
-    sp.dependency 'NTLog/Core'
-  end
-
+#  s.subspec "Crashlytics" do |sp|
+#    sp.source_files = 'Listeners/Crashlytics'
+#
+#    sp.dependency 'NTLog/Core'
+#  end
 
 end
