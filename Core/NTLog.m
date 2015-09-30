@@ -44,9 +44,9 @@ void NTLog_AddListener(id<NTLogListener> listener)
 }
 
 
-void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...)
+void NTLog_Logv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, va_list args)
 {
-    if ( !(sLogFlags & logEntryType) && !(sConsoleLogFlags && logEntryType) )
+    if ( !(sLogFlags & logEntryType) && !(sConsoleLogFlags & logEntryType) )
         return;
     
     const int MAX_LENGTH = 1024 - 3;    // -3 for @"..."
@@ -54,14 +54,11 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
 	static CFTimeZoneRef zone = nil;
 	if (!zone) zone = CFTimeZoneCopyDefault();
     
-    va_list args;
-    va_start(args, format);
-    
     NSMutableString *message = [NSMutableString new];
 
     CFGregorianDate date = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), zone);
      
-    [message appendFormat:@"%02i/%02i/%02i ", date.year%100, date.month, date.day];
+    [message appendFormat:@"%02i-%02i-%02i ", date.year%100, date.month, date.day];
      
     [message appendFormat:@"%02i:%02i:%02i ", date.hour, date.minute, (unsigned)date.second];
 
@@ -95,10 +92,10 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
     }
     
     
-    if ( sConsoleLogFlags && logEntryType )
+    if ( sConsoleLogFlags & logEntryType )
         printf("%s\n", [message UTF8String]);
 
-    if ( sListeners && (sLogFlags && logEntryType) )
+    if ( sListeners && (sLogFlags & logEntryType) )
     {
         for(id<NTLogListener> listener in sListeners)
         {
@@ -113,5 +110,14 @@ void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSS
     
     message = nil;  // arc will deallocate
     user_message = nil;
+}
+
+
+void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    NTLog_Logv(filename, lineNum, logEntryType, format, args);
+    va_end(args);
 }
 

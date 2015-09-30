@@ -46,7 +46,7 @@ void NTLogEnableConsoleLogging(NTLogEntryType flags);
 void NTLogEnableLogging(NTLogEntryType flags);
 NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType);
 void NTLog_AddListener(id<NTLogListener> listener);
-
+void NTLog_Logv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, va_list args);
 void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...) NS_FORMAT_FUNCTION(4,5);
 
 #ifdef __cplusplus
