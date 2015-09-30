@@ -16,7 +16,7 @@ NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType)
     if ( logEntryType & NTLogEntryTypeFatal )         return @"Fatal";
     if ( logEntryType & NTLogEntryTypeError )         return @"Error";
     if ( logEntryType & NTLogEntryTypeWarn )          return @"Warn";
-    if ( logEntryType & NTLogEntryTypeLog )           return @"Log";
+    if ( logEntryType & NTLogEntryTypeInfo )          return @"Info";
     if ( logEntryType & NTLogEntryTypeDebug )         return @"Debug";
     
     return nil;
@@ -35,7 +35,7 @@ void NTLogEnableConsoleLogging(NTLogEntryType flags)
 }
 
 
-void NTLog_AddListener(id<NTLogListener> listener)
+void NTLogAddListener(id<NTLogListener> listener)
 {
     if ( !sListeners )
         sListeners = [NSMutableArray new];
@@ -44,7 +44,7 @@ void NTLog_AddListener(id<NTLogListener> listener)
 }
 
 
-void NTLog_Logv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, va_list args)
+void NTLogOutputv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, va_list args)
 {
     if ( !(sLogFlags & logEntryType) && !(sConsoleLogFlags & logEntryType) )
         return;
@@ -62,7 +62,7 @@ void NTLog_Logv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NS
      
     [message appendFormat:@"%02zd:%02zd:%02zd ", date.hour, date.minute, (int)date.second];
 
-    if ( logEntryType != NTLogEntryTypeLog )
+    if ( logEntryType != NTLogEntryTypeInfo )
         [message appendFormat:@"%@: ", NTLog_GetLogEntryTypeName(logEntryType)];
     
     NSString *threadName = nil;
@@ -113,11 +113,11 @@ void NTLog_Logv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NS
 }
 
 
-void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...)
+void NTLogOutput(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...)
 {
     va_list args;
     va_start(args, format);
-    NTLog_Logv(filename, lineNum, logEntryType, format, args);
+    NTLogOutputv(filename, lineNum, logEntryType, format, args);
     va_end(args);
 }
 

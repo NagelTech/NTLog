@@ -10,12 +10,12 @@ typedef NS_OPTIONS(NSInteger, NTLogEntryType)
 {
     NTLogEntryTypeNone    = 0,
     NTLogEntryTypeDebug   = 1,
-    NTLogEntryTypeLog     = 2,
+    NTLogEntryTypeInfo     = 2,
     NTLogEntryTypeWarn    = 4,
     NTLogEntryTypeError   = 8,
     NTLogEntryTypeFatal   = 16,
     
-    NTLogEntryTypeAll     = NTLogEntryTypeDebug | NTLogEntryTypeLog | NTLogEntryTypeWarn | NTLogEntryTypeError | NTLogEntryTypeFatal,
+    NTLogEntryTypeAll     = NTLogEntryTypeDebug | NTLogEntryTypeInfo | NTLogEntryTypeWarn | NTLogEntryTypeError | NTLogEntryTypeFatal,
     
 } ;
 
@@ -32,11 +32,17 @@ typedef NS_OPTIONS(NSInteger, NTLogEntryType)
 @end
 
 
-#define NTLogDebug(...)         NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeDebug, __VA_ARGS__)
-#define NTLog(...)              NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeLog, __VA_ARGS__)
-#define NTLogWarn(...)          NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeWarn, __VA_ARGS__)
-#define NTLogError(...)         NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeError, __VA_ARGS__)
-#define NTLogFatal(...)         NTLog_Log(@__FILE__, __LINE__, NTLogEntryTypeFatal, __VA_ARGS__)
+#ifdef DEBUG
+#   define NTLogDebug(...)         NTLogOutput(@__FILE__, __LINE__, NTLogEntryTypeDebug, __VA_ARGS__)
+#else
+#   define NTLogDebug(...)
+#endif
+
+#define NTLogInfo(...)          NTLogOutput(@__FILE__, __LINE__, NTLogEntryTypeInfo, __VA_ARGS__)
+#define NTLog(...)              NTLogOutput(@__FILE__, __LINE__, NTLogEntryTypeInfo, __VA_ARGS__)
+#define NTLogWarn(...)          NTLogOutput(@__FILE__, __LINE__, NTLogEntryTypeWarn, __VA_ARGS__)
+#define NTLogError(...)         NTLogOutput(@__FILE__, __LINE__, NTLogEntryTypeError, __VA_ARGS__)
+#define NTLogFatal(...)         NTLogOutput(@__FILE__, __LINE__, NTLogEntryTypeFatal, __VA_ARGS__)
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,10 +50,10 @@ extern "C" {
 
 void NTLogEnableConsoleLogging(NTLogEntryType flags);
 void NTLogEnableLogging(NTLogEntryType flags);
-NSString *NTLog_GetLogEntryTypeName(NTLogEntryType logEntryType);
-void NTLog_AddListener(id<NTLogListener> listener);
-void NTLog_Logv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, va_list args);
-void NTLog_Log(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...) NS_FORMAT_FUNCTION(4,5);
+NSString *NTLogGetLogEntryTypeName(NTLogEntryType logEntryType);
+void NTLogAddListener(id<NTLogListener> listener);
+void NTLogOutputv(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, va_list args);
+void NTLogOutput(NSString *filename, int lineNum, NTLogEntryType logEntryType, NSString *format, ...) NS_FORMAT_FUNCTION(4,5);
 
 #ifdef __cplusplus
 }

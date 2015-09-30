@@ -42,7 +42,7 @@
     
     _items = [NSMutableArray array];
     
-    NTLog_AddListener(self);
+    NTLogAddListener(self);
     
     NTLog(@" --- LogListener added -- ");
 }
