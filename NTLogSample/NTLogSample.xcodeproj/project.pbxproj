@@ -37,9 +37,6 @@
 		F07B31DB187A689F00D6E54B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F07B31DD187A689F00D6E54B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F07B31E4187A689F00D6E54B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		F07B31EC187A689F00D6E54B /* NTLogSampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NTLogSampleTests-Info.plist"; sourceTree = "<group>"; };
-		F07B31EE187A689F00D6E54B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F07B31F0187A689F00D6E54B /* NTLogSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTLogSampleTests.m; sourceTree = "<group>"; };
 		F07B3200187A6CF700D6E54B /* NTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTLog.h; sourceTree = "<group>"; };
 		F07B3201187A6CF700D6E54B /* NTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTLog.m; sourceTree = "<group>"; };
 		F07B3204187A86CA00D6E54B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -71,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				F07B31D1187A689F00D6E54B /* NTLogSample */,
-				F07B31EA187A689F00D6E54B /* NTLogSampleTests */,
 				F07B31CA187A689F00D6E54B /* Frameworks */,
 				F07B31C9187A689F00D6E54B /* Products */,
 			);
@@ -119,24 +115,6 @@
 				F07B31D4187A689F00D6E54B /* InfoPlist.strings */,
 				F07B31D7187A689F00D6E54B /* main.m */,
 				F07B31D9187A689F00D6E54B /* NTLogSample-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F07B31EA187A689F00D6E54B /* NTLogSampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				F07B31F0187A689F00D6E54B /* NTLogSampleTests.m */,
-				F07B31EB187A689F00D6E54B /* Supporting Files */,
-			);
-			path = NTLogSampleTests;
-			sourceTree = "<group>";
-		};
-		F07B31EB187A689F00D6E54B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F07B31EC187A689F00D6E54B /* NTLogSampleTests-Info.plist */,
-				F07B31ED187A689F00D6E54B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -255,14 +233,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				F07B31D5187A689F00D6E54B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F07B31ED187A689F00D6E54B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F07B31EE187A689F00D6E54B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
