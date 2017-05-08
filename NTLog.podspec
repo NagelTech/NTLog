@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license      = {:type => 'MIT', :file => 'license.txt'}
   s.author       = { "Ethan Nagel" => "eanagel@gmail.com" }
   s.platform     = :ios
-  s.source       = { :git => "https://github.com/NagelTech/NTLog.git", :tag => "1.11" }
+  s.source       = { :git => "https://github.com/NagelTech/NTLog.git", :tag => "1.12" }
   s.requires_arc = true
 
   s.subspec "Core" do |sp|
