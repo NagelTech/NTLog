@@ -14,11 +14,6 @@
 		F07B31D8187A689F00D6E54B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F07B31D7187A689F00D6E54B /* main.m */; };
 		F07B31DC187A689F00D6E54B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F07B31DB187A689F00D6E54B /* AppDelegate.m */; };
 		F07B31DE187A689F00D6E54B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F07B31DD187A689F00D6E54B /* Images.xcassets */; };
-		F07B31E5187A689F00D6E54B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F07B31E4187A689F00D6E54B /* XCTest.framework */; };
-		F07B31E6187A689F00D6E54B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F07B31CB187A689F00D6E54B /* Foundation.framework */; };
-		F07B31E7187A689F00D6E54B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F07B31CF187A689F00D6E54B /* UIKit.framework */; };
-		F07B31EF187A689F00D6E54B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F07B31ED187A689F00D6E54B /* InfoPlist.strings */; };
-		F07B31F1187A689F00D6E54B /* NTLogSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F07B31F0187A689F00D6E54B /* NTLogSampleTests.m */; };
 		F07B3202187A6CF700D6E54B /* NTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F07B3201187A6CF700D6E54B /* NTLog.m */; };
 		F07B3207187A86CA00D6E54B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07B3204187A86CA00D6E54B /* MainViewController.m */; };
 		F07B3208187A86CA00D6E54B /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07B3205187A86CA00D6E54B /* MainViewController.xib */; };
@@ -28,16 +23,6 @@
 		F0A25A2A1896D82E006AB1AF /* NTLog.podspec in Resources */ = {isa = PBXBuildFile; fileRef = F0A25A271896D82E006AB1AF /* NTLog.podspec */; };
 		F0A25A2B1896D82E006AB1AF /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = F0A25A281896D82E006AB1AF /* license.txt */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		F07B31E8187A689F00D6E54B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F07B31C0187A689F00D6E54B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F07B31C7187A689F00D6E54B;
-			remoteInfo = NTLogSample;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F07B31C8187A689F00D6E54B /* NTLogSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NTLogSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,7 +36,6 @@
 		F07B31DA187A689F00D6E54B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F07B31DB187A689F00D6E54B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F07B31DD187A689F00D6E54B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F07B31E3187A689F00D6E54B /* NTLogSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NTLogSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F07B31E4187A689F00D6E54B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F07B31EC187A689F00D6E54B /* NTLogSampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NTLogSampleTests-Info.plist"; sourceTree = "<group>"; };
 		F07B31EE187A689F00D6E54B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -80,16 +64,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F07B31E0187A689F00D6E54B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F07B31E5187A689F00D6E54B /* XCTest.framework in Frameworks */,
-				F07B31E7187A689F00D6E54B /* UIKit.framework in Frameworks */,
-				F07B31E6187A689F00D6E54B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -107,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				F07B31C8187A689F00D6E54B /* NTLogSample.app */,
-				F07B31E3187A689F00D6E54B /* NTLogSampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,24 +192,6 @@
 			productReference = F07B31C8187A689F00D6E54B /* NTLogSample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F07B31E2187A689F00D6E54B /* NTLogSampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F07B31F7187A689F00D6E54B /* Build configuration list for PBXNativeTarget "NTLogSampleTests" */;
-			buildPhases = (
-				F07B31DF187A689F00D6E54B /* Sources */,
-				F07B31E0187A689F00D6E54B /* Frameworks */,
-				F07B31E1187A689F00D6E54B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F07B31E9187A689F00D6E54B /* PBXTargetDependency */,
-			);
-			name = NTLogSampleTests;
-			productName = NTLogSampleTests;
-			productReference = F07B31E3187A689F00D6E54B /* NTLogSampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -245,11 +200,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Nagel Technologies, Inc.";
-				TargetAttributes = {
-					F07B31E2187A689F00D6E54B = {
-						TestTargetID = F07B31C7187A689F00D6E54B;
-					};
-				};
 			};
 			buildConfigurationList = F07B31C3187A689F00D6E54B /* Build configuration list for PBXProject "NTLogSample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -264,7 +214,6 @@
 			projectRoot = "";
 			targets = (
 				F07B31C7187A689F00D6E54B /* NTLogSample */,
-				F07B31E2187A689F00D6E54B /* NTLogSampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -284,14 +233,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F07B31E1187A689F00D6E54B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F07B31EF187A689F00D6E54B /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -307,23 +248,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F07B31DF187A689F00D6E54B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F07B31F1187A689F00D6E54B /* NTLogSampleTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F07B31E9187A689F00D6E54B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F07B31C7187A689F00D6E54B /* NTLogSample */;
-			targetProxy = F07B31E8187A689F00D6E54B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F07B31D4187A689F00D6E54B /* InfoPlist.strings */ = {
@@ -443,48 +368,6 @@
 			};
 			name = Release;
 		};
-		F07B31F8187A689F00D6E54B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NTLogSample.app/NTLogSample";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NTLogSample/NTLogSample-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "NTLogSampleTests/NTLogSampleTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		F07B31F9187A689F00D6E54B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NTLogSample.app/NTLogSample";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NTLogSample/NTLogSample-Prefix.pch";
-				INFOPLIST_FILE = "NTLogSampleTests/NTLogSampleTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -502,15 +385,6 @@
 			buildConfigurations = (
 				F07B31F5187A689F00D6E54B /* Debug */,
 				F07B31F6187A689F00D6E54B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F07B31F7187A689F00D6E54B /* Build configuration list for PBXNativeTarget "NTLogSampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F07B31F8187A689F00D6E54B /* Debug */,
-				F07B31F9187A689F00D6E54B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
