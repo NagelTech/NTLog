@@ -49,6 +49,7 @@ extern "C" {
 #endif
 
 void NTLogEnableConsoleLogging(NTLogEntryType flags);
+void NTLogEnableListenerLogging(NTLogEntryType flags);
 void NTLogEnableLogging(NTLogEntryType flags);
 NSString *NTLogGetLogEntryTypeName(NTLogEntryType logEntryType);
 void NTLogSetMaxLineLength(SInt32 maxLineLength);

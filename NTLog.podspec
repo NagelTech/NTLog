@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "NTLog"
-  s.version      = "1.11"
+  s.version      = "1.12"
   s.summary      = "A simple, extensible iOS logging system."
   s.homepage     = "https://github.com/NagelTech/NTLog"
   s.license      = {:type => 'MIT', :file => 'license.txt'}

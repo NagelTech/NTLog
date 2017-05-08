@@ -37,6 +37,12 @@ void NTLogEnableConsoleLogging(NTLogEntryType flags)
 }
 
 
+void NTLogEnableListenerLogging(NTLogEntryType flags)
+{
+    sLogFlags = flags;
+}
+
+
 void NTLogSetMaxLineLength(SInt32 maxLineLength)
 {
     sMaxLineLength = maxLineLength;
